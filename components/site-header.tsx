@@ -23,7 +23,7 @@ export function SiteHeader() {
         </Link>
         <nav className="desktop-nav" aria-label="Primary navigation">
           {links.map(link => <Link key={link.href} href={link.href}>{link.label}</Link>)}
-          <a className="button small" href="#quote">Request Service</a>
+          <a className="button small" href="/#quote">Request Service</a>
         </nav>
         <div className="mobile-actions">
           <a className="icon-link" href={contractor.business.phoneHref} aria-label={"Call " + contractor.business.name}><Phone size={20}/></a>
