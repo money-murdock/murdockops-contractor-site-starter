@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     description: siteDescription,
   },
   twitter: { card: "summary_large_image", title: contractor.business.name, description: siteDescription },
+  category: "HVAC Services",
 }
 
 const businessSchema = {
@@ -30,6 +31,7 @@ const businessSchema = {
   description: siteDescription,
   url: siteUrl,
   telephone: contractor.business.phone,
+  priceRange: "$$",
   areaServed: contractor.location.cities.map(name => ({ "@type": "City", name })),
   sameAs: contractor.business.sameAs || [],
   hasOfferCatalog: {
@@ -40,7 +42,10 @@ const businessSchema = {
       itemOffered: { "@type": "Service", name: service.name, url: siteUrl + "/services/" + service.slug },
     })),
   },
+  ...(contractor.reviews.length > 0 ? { review: contractor.reviews.map(review => ({ "@type": "Review", reviewBody: review.quote, author: { "@type": "Person", name: review.name }, reviewRating: { "@type": "Rating", ratingValue: 5, bestRating: 5 } })) } : {}),
 }
+
+const faqSchema = contractor.faqs.length > 0 ? { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: contractor.faqs.map(faq => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })) } : null
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -58,6 +63,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+        {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
       </head>
       <body>{children}</body>
     </html>

@@ -44,9 +44,10 @@ export function QuoteForm({ phone, services }: { phone: string; services: Servic
 
   if (status === "success") return <div className="form-success" role="status"><CheckCircle2 size={42}/><h3>Request received.</h3><p>The team will follow up shortly.</p><a href={"tel:" + phone.replace(/\D/g, "")}>Call {phone}</a></div>
 
-  return <form onSubmit={submit}>
+  return <form onSubmit={submit} aria-describedby="quote-form-help">
     <div className="honeypot" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off"/></label></div>
-    <div className="form-grid"><label>Name<input required name="name" autoComplete="name" placeholder="Your name"/></label><label>Phone<input required name="phone" type="tel" autoComplete="tel" placeholder="(555) 555-0100"/></label></div>
+    <p id="quote-form-help" className="form-help">Required fields are checked before the request is sent.</p>
+    <div className="form-grid"><label>Name<input required name="name" autoComplete="name" maxLength={100} placeholder="Your name"/></label><label>Phone<input required name="phone" type="tel" autoComplete="tel" maxLength={25} placeholder="(555) 555-0100"/></label></div>
     <div className="form-grid"><label>ZIP Code<input required name="postalCode" inputMode="numeric" pattern="[0-9]{5}(-[0-9]{4})?" autoComplete="postal-code" placeholder="74055"/></label><label>Customer Type<select required name="propertyType" defaultValue=""><option value="" disabled>Select one...</option><option>Homeowner / Residential</option><option>Business / Commercial</option><option>Builder / General Contractor</option><option>Property Manager / Landlord</option><option>Other</option></select></label></div>
     <div className="form-grid"><label>Service<select required name="service" defaultValue=""><option value="" disabled>Select a service...</option>{services.map(service => <option key={service.slug} value={service.name}>{service.name}</option>)}<option>Other / Not sure</option></select></label><label>Urgency<select required name="urgency" defaultValue=""><option value="" disabled>Select timing...</option><option>Emergency / No heating or cooling</option><option>Today</option><option>This week</option><option>Planning ahead</option></select></label></div>
     <label>What can we help with?<textarea required name="notes" rows={3} minLength={5} maxLength={1000} placeholder="Describe the issue or project"/></label>

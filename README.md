@@ -29,3 +29,7 @@ The master starter includes the patterns selected from the ClimaCare build:
 4. Run the build and verify every generated service route.
 5. Test one form submission and confirm exactly one row writes to the client Leads tab.
 6. Run visual QA on desktop and mobile before launch.
+
+## Reusable operating procedure
+
+See `skills/murdockops-contractors-site-kit/SKILL.md` for the client intake, command-center duplication, separate deployment, and final QA workflow. The master starter and master Google Sheet are never populated with client-specific data.

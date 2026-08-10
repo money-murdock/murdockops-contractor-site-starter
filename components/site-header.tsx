@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Menu, Phone, X } from "lucide-react"
+import { ChevronDown, Menu, Phone, X } from "lucide-react"
 import { useState } from "react"
 import { contractor } from "@/lib/site-config"
 
@@ -22,7 +22,14 @@ export function SiteHeader() {
           <span>{contractor.business.name}</span>
         </Link>
         <nav className="desktop-nav" aria-label="Primary navigation">
-          {links.map(link => <Link key={link.href} href={link.href}>{link.label}</Link>)}
+          <Link href="/">Home</Link>
+          <div className="nav-services">
+            <Link href="/services">Services <ChevronDown size={15}/></Link>
+            <div className="nav-services-menu">
+              {contractor.services.map(service => <Link key={service.slug} href={`/services/${service.slug}`}>{service.name}</Link>)}
+            </div>
+          </div>
+          {links.filter(link => link.href !== "/services").map(link => <Link key={link.href} href={link.href}>{link.label}</Link>)}
           <a className="button small" href="/#quote">Request Service</a>
         </nav>
         <div className="mobile-actions">
@@ -34,7 +41,7 @@ export function SiteHeader() {
       </div>
       {open && <nav className="mobile-nav" aria-label="Mobile navigation">
         {links.map(link => <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label}</Link>)}
-        <a className="button" href="#quote" onClick={() => setOpen(false)}>Request Service</a>
+        <a className="button" href="/#quote" onClick={() => setOpen(false)}>Request Service</a>
       </nav>}
     </header>
   )

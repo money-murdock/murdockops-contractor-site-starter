@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     const targetRow = last === -1 ? 6 : last + 7
     const digits = String(body.phone).replace(/\D/g, "")
     const phone = digits.length === 10 ? `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}` : String(body.phone).trim()
-    const row = [timestamp, leadId, String(body.name).trim(), phone, String(body.service).trim(), String(body.postalCode).trim(), String(body.propertyType).trim(), String(body.urgency).trim(), body.smsConsent ? "Yes" : "No", String(body.pageUrl || "").trim(), "Website", "", "", "", "New", "", "", "", String(body.notes).trim(), "", false]
+    const row = [timestamp, leadId, String(body.name).trim(), phone, String(body.service).trim(), String(body.postalCode).trim(), String(body.propertyType).trim(), String(body.urgency).trim(), body.smsConsent ? "Yes" : "No", String(body.pageUrl || "").trim(), "Website", String(body.utmSource || "").trim(), String(body.utmMedium || "").trim(), String(body.utmCampaign || "").trim(), "New", "", "", "", String(body.notes).trim(), "", false]
     await sheets.spreadsheets.values.update({ spreadsheetId, range: `${sheetTab}!A${targetRow}:U${targetRow}`, valueInputOption: "USER_ENTERED", requestBody: { values: [row] } })
     return NextResponse.json({ ok: true })
   } catch (error) {
