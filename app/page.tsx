@@ -1,0 +1,17 @@
+import Link from "next/link"
+import { ArrowRight, Check, ChevronDown, Phone } from "lucide-react"
+import { contractor } from "@/lib/site-config"
+import { QuoteForm } from "@/components/quote-form"
+
+export default function Home() {
+  const { business, location } = contractor
+  return <main>
+    <header className="site-header"><Link href="/" className="brand"><span className="brand-mark">{business.logoText}</span><span>{business.name}</span></Link><nav>{contractor.services.slice(0, 2).map(s => <Link key={s.slug} href={`#${s.slug}`}>{s.name}</Link>)}<Link href="#service-area">Service Area</Link><Link href="#quote" className="button small">Request Service</Link></nav></header>
+    <section className="hero"><div className="container hero-grid"><div><p className="eyebrow">{location.serviceAreaLabel}</p><h1>{business.tagline}</h1><p className="hero-copy">{business.description}</p><div className="actions"><a className="button" href={business.phoneHref}><Phone size={18}/> Call {business.phone}</a><a className="button secondary" href="#quote">Request service <ArrowRight size={18}/></a></div><div className="trust-row">{contractor.trustItems.map(item => <span key={item}><Check size={16}/>{item}</span>)}</div></div><div className="quote-card" id="quote"><p className="eyebrow">Get started</p><h2>Tell us what you need.</h2><p>Share a few details and the business can follow up with the right next step.</p><QuoteForm phone={business.phone}/></div></div></section>
+    <section className="section"><div className="container"><p className="eyebrow">Services</p><h2>Help for the work in front of you.</h2><div className="cards">{contractor.services.map(service => <article className="card" id={service.slug} key={service.slug}><h3>{service.name}</h3><p>{service.shortDescription}</p><ul>{service.benefits.map(b => <li key={b}><Check size={16}/>{b}</li>)}</ul><Link href={`/services/${service.slug}`}>Learn more <ArrowRight size={16}/></Link></article>)}</div></div></section>
+    <section className="section tinted"><div className="container process"><div><p className="eyebrow">The process</p><h2>A clear next step, from first contact to finished work.</h2></div><ol><li><b>01</b><span>Contact the team</span></li><li><b>02</b><span>Confirm the situation</span></li><li><b>03</b><span>Review the options</span></li><li><b>04</b><span>Move forward with clarity</span></li></ol></div></section>
+    <section className="section" id="service-area"><div className="container split"><div><p className="eyebrow">Service area</p><h2>Serving {location.primaryCity} and nearby communities.</h2><p>Service availability depends on the address and job type. Use the verified service-area list for each client before publishing.</p></div><div className="pill-list">{location.cities.map(city => <span key={city}>{city}</span>)}</div></div></section>
+    <section className="section faq"><div className="container narrow"><p className="eyebrow">Questions</p><h2>Good information before you call.</h2>{contractor.faqs.map(faq => <details key={faq.question}><summary>{faq.question}<ChevronDown size={18}/></summary><p>{faq.answer}</p></details>)}</div></section>
+    <footer className="footer"><div className="container footer-grid"><div><div className="brand"><span className="brand-mark">{business.logoText}</span><span>{business.name}</span></div><p>{location.serviceAreaLabel}</p></div><div><b>Contact</b><a href={business.phoneHref}>{business.phone}</a>{business.email && <a href={`mailto:${business.email}`}>{business.email}</a>}</div></div></footer>
+  </main>
+}
