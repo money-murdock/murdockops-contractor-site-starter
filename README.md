@@ -4,15 +4,28 @@ Neutral, client-agnostic starter for HVAC and other local-service contractor web
 
 ## Operating rule
 
-Replace `lib/site-config.ts` with verified client data. Components should remain generic. Do not publish claims, service areas, warranties, financing, certifications, or guarantees unless the client has verified them.
+Replace lib/site-config.ts with the new client profile. Keep reusable components generic. Add only client-approved services, service areas, reviews, credentials, financing, warranties, photos, and claims.
 
-## ClimaCare extraction
+## Reusable baseline
 
-This starter preserves the useful ClimaCare patterns: immediate phone/quote conversion, service cards, process explanation, service-area proof, FAQs, and a reusable lead form surface. It does not copy ClimaCare identity, content, claims, colors, assets, or production routes.
+The master starter includes the patterns selected from the ClimaCare build:
 
-## Next implementation passes
+- Conversion-first hero with phone and request-service CTAs
+- Responsive navigation with mobile menu
+- Config-driven service cards, service routes, and service index
+- Config-driven service-area page
+- Process section, FAQ section, and optional reviews
+- Google Sheets lead form with UTM capture and honeypot protection
+- Exact Leads A-U mapping expected by the MurdockOps command center
+- Metadata, canonical URLs, Open Graph, robots, sitemap, and HVACBusiness/WebSite schema
+- Separate About and Contact routes
+- Vercel-compatible Next.js structure
 
-1. Add route-level service detail pages driven by `services`.
-2. Add configurable reviews, gallery, financing, builders, commercial, and maintenance modules.
-3. Connect the form to the selected client's lead destination.
-4. Add generated metadata, schema, sitemap, robots, accessibility checks, and visual QA.
+## New client setup
+
+1. Replace lib/site-config.ts with the client profile.
+2. Add client assets under public and reference them from the profile/components.
+3. Configure the client Google Sheet environment variables in Vercel.
+4. Run the build and verify every generated service route.
+5. Test one form submission and confirm exactly one row writes to the client Leads tab.
+6. Run visual QA on desktop and mobile before launch.
