@@ -17,8 +17,10 @@ Use this procedure only after the user supplies the client name and source links
 
 ## Required QA before delivery
 
-- Check desktop and mobile navigation, keyboard focus, phone links, and request-form validation.
-- Verify responsive behavior at phone, tablet, laptop, and desktop widths, including the mobile Services dropdown, branded home/scroll-to-top action, and no horizontal overflow.
+- Check the sticky header after scrolling on every route. Verify active-page navigation, keyboard focus, phone links, and request-form validation.
+- Verify the mobile/tablet menu opens below the sticky header, expands Services, exposes Call and Request actions, locks background scrolling, and closes from Escape, outside click, route change, and the close button.
+- Verify the branded logo returns interior routes to `/` and scrolls the homepage to the top without reloading.
+- Verify responsive behavior at 320px, 390px, 768px, phone landscape, 1024px, laptop, and wide-desktop widths. Confirm sensible form columns, readable spacing, no clipped controls, and no horizontal overflow.
 - Test `/`, `/services`, every generated `/services/[slug]`, `/service-areas`, `/about`, and `/contact`.
 - Submit one approved test lead and confirm exactly one row lands in the client Leads tab with UTM fields and the expected A:U mapping.
 - Verify metadata, canonical URL, Open Graph/Twitter fields, LocalBusiness/HVACBusiness schema, FAQ schema when FAQs exist, sitemap, and robots.
