@@ -40,7 +40,17 @@ export async function POST(request: Request) {
   try {
     const sheets = getSheetsClient()
     const now = new Date()
-    const timestamp = now.toLocaleString("en-US", { timeZone: "America/Chicago" })
+    const dateTimeParts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Chicago",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    }).formatToParts(now)
+    const part = (type: string) => dateTimeParts.find(value => value.type === type)?.value || ""
+    const timestamp = `${part("month")}/${part("day")}/${part("year")} ${part("hour")}:${part("minute")} ${part("dayPeriod")}`
     const dateParts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Chicago", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(now)
     const date = `${dateParts.find(part => part.type === "year")?.value}${dateParts.find(part => part.type === "month")?.value}${dateParts.find(part => part.type === "day")?.value}`
     const leadId = `LD-${date}-${Math.random().toString(36).slice(2,8).toUpperCase()}`

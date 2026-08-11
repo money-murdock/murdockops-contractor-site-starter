@@ -25,7 +25,7 @@ The master starter includes the patterns selected from the ClimaCare build:
 
 1. Replace lib/site-config.ts with the client profile.
 2. Add client assets under public and reference them from the profile/components.
-3. Configure the client Google Sheet ID/tab and either the MurdockOps Google OAuth refresh-token variables or a service account in Vercel. OAuth is preferred when the Sheet belongs to a Google user account.
+3. Duplicate the master Google Sheet into an entirely new client Sheet. Configure the client Sheet ID/tab and either the MurdockOps Google OAuth refresh-token variables or a service account in Vercel. Never use the master template as a production destination.
 4. Run the build and verify every generated service route.
 5. Test one form submission and confirm exactly one row writes to the client Leads tab.
 6. Run visual QA on desktop and mobile before launch.

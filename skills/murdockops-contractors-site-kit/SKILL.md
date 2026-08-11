@@ -11,8 +11,8 @@ Use this procedure only after the user supplies the client name and source links
 
 1. Start from the clean `main` branch of `murdockops-contractor-site-starter`. Keep the master starter untouched.
 2. Gather the client’s supplied website, Facebook page, Google Business Profile, service list, areas served, phone, email, hours, approved claims, reviews, and assets. Treat sources as evidence and flag conflicts for approval.
-3. Duplicate the clean MurdockOps Contractor Command Center Google Sheet for the client. Populate the duplicate only; do not edit the master template. Preserve the Leads A:U schema.
-4. Create a separate client website from the starter. Replace `lib/site-config.ts`, approved copy, assets, and environment variables. Keep all reusable components generic. Configure `GOOGLE_SHEET_ID` and `GOOGLE_SHEET_TAB`; prefer OAuth refresh-token credentials for the MurdockOps Google account, with service-account credentials as a supported fallback.
+3. Create an entirely separate Google Sheet for the client by duplicating the clean MurdockOps Contractor Command Center template. Populate the client copy only; never connect a client website to the master template. Preserve the Leads A:U schema and record the new Sheet ID.
+4. Create a separate client website from the starter. Replace `lib/site-config.ts`, approved copy, assets, and environment variables. Keep all reusable components generic. Configure that client deployment with the new `GOOGLE_SHEET_ID` and `GOOGLE_SHEET_TAB`; prefer OAuth refresh-token credentials for the MurdockOps Google account, with service-account credentials as a supported fallback.
 5. Deploy the client website separately with its own Vercel project and client Sheet credentials. Never modify unrelated projects.
 
 ## Required QA before delivery
