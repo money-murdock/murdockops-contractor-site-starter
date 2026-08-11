@@ -6,12 +6,18 @@ import "./responsive.css"
 const siteUrl = contractor.business.siteUrl || "https://example.com"
 const siteDescription = contractor.business.description
 const businessId = siteUrl + "/#business"
+const assets = contractor.business.brandAssets
+const socialImage = assets?.socialImage || "/opengraph-image"
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: contractor.business.name + " | " + contractor.location.primaryCity + " HVAC Services",
   description: siteDescription,
   alternates: { canonical: "/" },
+  icons: {
+    icon: assets?.favicon || "/icon",
+    apple: assets?.appleTouchIcon || "/apple-icon",
+  },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
@@ -19,9 +25,9 @@ export const metadata: Metadata = {
     siteName: contractor.business.name,
     title: contractor.business.name + " | HVAC Services",
     description: siteDescription,
-    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: contractor.business.name }],
+    images: [{ url: socialImage, width: 1200, height: 630, alt: `${contractor.business.name} branded website preview` }],
   },
-  twitter: { card: "summary_large_image", title: contractor.business.name, description: siteDescription, images: ["/opengraph-image"] },
+  twitter: { card: "summary_large_image", title: contractor.business.name, description: siteDescription, images: [socialImage] },
   category: "HVAC Services",
 }
 

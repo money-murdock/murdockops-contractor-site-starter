@@ -19,14 +19,14 @@ The master starter includes the patterns selected from the ClimaCare build:
 - Google Sheets lead form with UTM capture, honeypot protection, atomic append writes, and OAuth/service-account support
 - Exact Leads A-U mapping expected by the MurdockOps command center
 - Metadata, canonical URLs, Open Graph, robots, sitemap, and HVACBusiness/WebSite schema
-- Config-driven favicon, Apple icon, and branded Open Graph/Twitter preview image with no framework branding
+- Config-driven real logo, favicon, Apple icon, truck photo, and Open Graph/Twitter preview image with no framework branding
 - Separate About and Contact routes
 - Vercel-compatible Next.js structure
 
 ## New client setup
 
 1. Replace lib/site-config.ts with the client profile.
-2. Add client assets under public and reference them from the profile/components.
+2. Recover or receive verified business-owned assets, store normalized files under `public/brand`, and populate `business.brandAssets`. Client launches require a real logo, square favicon, Apple icon, and 1200×630 company-branded social image; use a branded truck when a suitable source photo exists.
 3. Duplicate the master Google Sheet into an entirely new client Sheet. Configure the client Sheet ID/tab and either the MurdockOps Google OAuth refresh-token variables or a service account in Vercel. Never use the master template as a production destination.
 4. Run the build and verify every generated service route.
 5. Test one form submission and confirm exactly one row writes to the client Leads tab.

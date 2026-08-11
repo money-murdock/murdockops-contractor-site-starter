@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import type { MouseEvent } from "react"
 import { contractor } from "@/lib/site-config"
+import { BrandMark } from "@/components/brand-mark"
 
 export function SiteBrand({ className = "brand", onActivate }: { className?: string; onActivate?: () => void }) {
   const pathname = usePathname()
@@ -17,7 +18,7 @@ export function SiteBrand({ className = "brand", onActivate }: { className?: str
   }
 
   return <Link href="/" className={className} onClick={handleClick} aria-label={`${contractor.business.name} home`}>
-    <span className="brand-mark" aria-hidden="true">{contractor.business.logoText}</span>
+    <BrandMark />
     <span>{contractor.business.name}</span>
   </Link>
 }
