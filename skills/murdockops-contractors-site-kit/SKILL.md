@@ -15,6 +15,8 @@ Use this procedure after receiving the client name and at least one official sou
 4. Create an entirely separate Google Sheet by duplicating the clean MurdockOps Contractor Command Center template. Populate the client copy only; preserve Leads A:U and record the new Sheet ID.
 5. Create a separate client website from the starter. Replace configuration, approved copy, assets, and environment variables while keeping reusable components generic. Configure the new Sheet ID/tab and OAuth refresh-token credentials for the MurdockOps Google account, with service-account credentials as a supported fallback.
 6. Deploy the client website separately with its own Vercel project and Sheet credentials. Connect the client’s production custom domain and set `business.siteUrl` to that exact HTTPS origin before launch. Never modify unrelated projects.
+7. Generate the non-public asset provenance manifest after placing approved files in `public/brand`: `node skills/murdockops-contractors-site-kit/scripts/brand-manifest.mjs --project <client-project> --sources <source-map.json>`. Correct every missing `sourceUrl` or `retrievedAt` entry; never place the manifest in `public`.
+8. Run `npm run lint`, `npm run preflight:client`, and `npm run build`. Fix every failure. After deployment, rerun preflight with `node skills/murdockops-contractors-site-kit/scripts/preflight.mjs --mode client --project <client-project> --url https://client-domain.example`.
 
 ## Required QA before delivery
 
@@ -34,3 +36,9 @@ Use this procedure after receiving the client name and at least one official sou
 - Verify metadata, canonical URL, Open Graph/Twitter fields, LocalBusiness/HVACBusiness schema, FAQ schema when FAQs exist, sitemap, and robots.
 - Confirm no master-sheet data, ClimaCare branding, unsupported claims, or client secrets remain in the starter or public build.
 - Record the final commit, deployment URL, form status, and any remaining blocker.
+
+## Deterministic gates
+
+- Run `npm run preflight:template` on the untouched master starter. This is the required repository/CI baseline.
+- Run `npm run preflight:client` on every client copy. It must fail while placeholders, a `*.vercel.app` production URL, missing branded assets, invalid favicon/social dimensions, exposed secrets, or forbidden branding remain.
+- Treat a nonzero result from the manifest generator, client preflight, lint, build, production route check, or approved lead submission as a launch blocker. Do not waive a gate silently.
