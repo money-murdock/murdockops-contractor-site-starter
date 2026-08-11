@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { contractor } from "@/lib/site-config"
 import { SiteHeader } from "@/components/site-header"
+import { SiteBrand } from "@/components/site-brand"
 
 export function generateStaticParams() { return contractor.services.map(service => ({ slug: service.slug })) }
 
@@ -29,6 +30,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     <section className="section tinted"><div className="container narrow"><p className="eyebrow">Need help now?</p><h2>Tell us what is happening.</h2><p>Use the request form on the homepage or call the business directly to confirm availability for your address.</p><a className="button" href="/#quote">Request service <ArrowRight size={18}/></a></div></section>
     <section className="section"><div className="container narrow"><p className="eyebrow">Common questions</p><h2>Before you schedule.</h2>{contractor.faqs.map(faq => <details key={faq.question}><summary>{faq.question}<ArrowRight size={18}/></summary><p>{faq.answer}</p></details>)}</div></section>
     {relatedServices.length > 0 && <section className="section tinted"><div className="container"><p className="eyebrow">Related services</p><h2>More ways we can help.</h2><div className="cards">{relatedServices.map(item => <Link className="card related-card" key={item.slug} href={`/services/${item.slug}`}><h3>{item.name}</h3><p>{item.shortDescription}</p><span className="text-link">Learn more <ArrowRight size={16}/></span></Link>)}</div></div></section>}
-    <footer className="footer"><div className="container"><div className="brand"><span className="brand-mark">{contractor.business.logoText}</span><span>{contractor.business.name}</span></div></div></footer>
+    <footer className="footer"><div className="container"><SiteBrand/></div></footer>
   </main>
 }

@@ -12,6 +12,14 @@ export type ContractorConfig = {
     logoText: string
     siteUrl?: string
     sameAs?: string[]
+    brandAssets?: {
+      logo?: string
+      favicon?: string
+      appleTouchIcon?: string
+      socialPhoto?: string
+      truckPhoto?: string
+      socialImage?: string
+    }
   }
   location: { primaryCity: string; state: string; serviceAreaLabel: string; cities: string[] }
   theme: { primary: string; accent: string; background: string; surface: string }
@@ -32,6 +40,8 @@ export const contractor: ContractorConfig = {
     logoText: "MO",
     siteUrl: "https://murdockops-contractor-site-starter.vercel.app",
     sameAs: [],
+    // Client builds must replace these with verified, business-owned files in /public/brand.
+    brandAssets: {},
   },
   location: {
     primaryCity: "Local Service",
