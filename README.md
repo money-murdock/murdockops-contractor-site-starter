@@ -33,6 +33,13 @@ The master starter includes the patterns selected from the ClimaCare build:
 6. Connect the client-owned custom domain and set `business.siteUrl` to that exact HTTPS origin. Do not launch or share a client-facing `*.vercel.app` URL.
 7. Run interaction and visual QA at 320px, 390px, 768px, phone landscape, 1024px, laptop, and wide-desktop widths before launch.
 
+## Release gates
+
+- Run `npm run preflight:template`, `npm run lint`, and `npm run build` on the master starter.
+- Run `npm run preflight:client`, `npm run lint`, and `npm run build` on every client copy.
+- Generate `brand-assets.json` with the skill's manifest script and retain source provenance outside `public`.
+- After deployment, run the client preflight again with `--url https://client-domain.example`, then complete one approved test form submission.
+
 ## Reusable operating procedure
 
 See `skills/murdockops-contractors-site-kit/SKILL.md` for the client intake, command-center duplication, separate deployment, and final QA workflow. The master starter and master Google Sheet are never populated with client-specific data.

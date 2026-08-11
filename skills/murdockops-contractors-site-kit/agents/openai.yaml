@@ -1,0 +1,5 @@
+interface:
+  display_name: "MurdockOps Contractor Site Kit"
+  short_description: "Build and launch contractor websites safely"
+  default_prompt: "Use $murdockops-contractors-site-kit to create and verify a production-ready contractor website from the MurdockOps starter."
+

@@ -66,7 +66,7 @@ export function SiteHeader() {
             </div>
           </div>
           {links.filter(link => link.href !== "/services").map(link => <Link key={link.href} href={link.href} className={isActive(link.href) ? "active" : undefined} aria-current={isActive(link.href) ? "page" : undefined}>{link.label}</Link>)}
-          <a className="button small" href="/#quote">Request Service</a>
+          <Link className="button small" href="/#quote">Request Service</Link>
         </nav>
         <div className="mobile-actions">
           <a className="icon-link" href={contractor.business.phoneHref} aria-label={"Call " + contractor.business.name}><Phone size={20}/></a>
@@ -91,7 +91,7 @@ export function SiteHeader() {
         {links.filter(link => link.href !== "/services").map(link => <Link key={link.href} href={link.href} onClick={closeMenu} className={isActive(link.href) ? "active" : undefined} aria-current={isActive(link.href) ? "page" : undefined}>{link.label}</Link>)}
         <div className="mobile-nav-actions">
           <a className="button" href={contractor.business.phoneHref} onClick={closeMenu}><Phone size={17}/> Call Now</a>
-          <a className="button secondary" href="/#quote" onClick={closeMenu}>Request Service</a>
+          <Link className="button secondary" href="/#quote" onClick={closeMenu}>Request Service</Link>
         </div>
       </nav></>}
     </header>
