@@ -24,21 +24,20 @@ export type ContractorConfig = {
 
 export const contractor: ContractorConfig = {
   business: {
-    name: "Your Contractor",
-    tagline: "Comfort, handled clearly.",
-    description: "Reliable heating and cooling service for homes and businesses in the local community.",
+    name: "MurdockOps Contractor Starter",
+    tagline: "A better starting point for local-service websites.",
+    description: "A responsive, conversion-ready website foundation for local-service contractors.",
     phone: "(555) 555-0100",
     phoneHref: "tel:5555550100",
-    email: "hello@example.com",
-    logoText: "YC",
-    siteUrl: "https://example.com",
+    logoText: "MO",
+    siteUrl: "https://murdockops-contractor-site-starter.vercel.app",
     sameAs: [],
   },
   location: {
-    primaryCity: "Your City",
+    primaryCity: "Local Service",
     state: "OK",
-    serviceAreaLabel: "Your City and surrounding communities",
-    cities: ["Your City", "Nearby City", "Surrounding Area"],
+    serviceAreaLabel: "Built for local-service contractors by MurdockOps",
+    cities: ["Residential", "Commercial", "Service-area ready"],
   },
   theme: { primary: "#123b5d", accent: "#e96b3a", background: "#f7f9fb", surface: "#ffffff" },
   services: [

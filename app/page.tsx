@@ -3,6 +3,8 @@ import { ArrowRight, Check, ChevronDown, Phone, Star } from "lucide-react"
 import { contractor } from "@/lib/site-config"
 import { QuoteForm } from "@/components/quote-form"
 import { SiteHeader } from "@/components/site-header"
+import { SiteBrand } from "@/components/site-brand"
+import { BackToTop } from "@/components/back-to-top"
 
 export default function Home() {
   const { business, location } = contractor
@@ -14,6 +16,6 @@ export default function Home() {
     <section className="section" id="service-area"><div className="container split"><div><p className="eyebrow">Service area</p><h2>Serving {location.primaryCity} and nearby communities.</h2><p>Use the verified service-area list for each client before publishing.</p><Link className="text-link" href="/service-areas">See service areas <ArrowRight size={16}/></Link></div><div className="pill-list">{location.cities.map(city => <span key={city}>{city}</span>)}</div></div></section>
     {contractor.reviews.length > 0 && <section className="section tinted"><div className="container"><p className="eyebrow">Customer feedback</p><h2>What customers are saying.</h2><div className="cards">{contractor.reviews.map(review => <article className="card review-card" key={review.name + review.quote}><div className="stars" aria-label="5 out of 5 stars">{[1,2,3,4,5].map(star => <Star key={star} size={16} fill="currentColor"/> )}</div><p>&quot;{review.quote}&quot;</p><strong>{review.name}</strong>{review.location && <span>{review.location}</span>}{review.source && <small>{review.source}</small>}</article>)}</div></div></section>}
     <section className="section faq"><div className="container narrow"><p className="eyebrow">Questions</p><h2>Good information before you call.</h2>{contractor.faqs.map(faq => <details key={faq.question}><summary>{faq.question}<ChevronDown size={18}/></summary><p>{faq.answer}</p></details>)}</div></section>
-    <footer className="footer"><div className="container footer-grid"><div><div className="brand"><span className="brand-mark">{business.logoText}</span><span>{business.name}</span></div><p>{location.serviceAreaLabel}</p></div><div><b>Contact</b><a href={business.phoneHref}>{business.phone}</a>{business.email && <a href={"mailto:" + business.email}>{business.email}</a>}</div></div></footer>
+    <footer className="footer"><div className="container footer-grid"><div><SiteBrand/><p>{location.serviceAreaLabel}</p><BackToTop/></div><div><b>Contact</b><a href={business.phoneHref}>{business.phone}</a>{business.email && <a href={"mailto:" + business.email}>{business.email}</a>}</div></div></footer>
   </main>
 }

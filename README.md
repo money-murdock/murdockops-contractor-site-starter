@@ -12,12 +12,14 @@ The master starter includes the patterns selected from the ClimaCare build:
 
 - Conversion-first hero with phone and request-service CTAs
 - Responsive navigation with mobile menu
+- Mobile service dropdown, branded home/scroll-to-top behavior, and responsive tablet/mobile layout handling
 - Config-driven service cards, service routes, and service index
 - Config-driven service-area page
 - Process section, FAQ section, and optional reviews
 - Google Sheets lead form with UTM capture, honeypot protection, atomic append writes, and OAuth/service-account support
 - Exact Leads A-U mapping expected by the MurdockOps command center
 - Metadata, canonical URLs, Open Graph, robots, sitemap, and HVACBusiness/WebSite schema
+- Config-driven favicon, Apple icon, and branded Open Graph/Twitter preview image with no framework branding
 - Separate About and Contact routes
 - Vercel-compatible Next.js structure
 

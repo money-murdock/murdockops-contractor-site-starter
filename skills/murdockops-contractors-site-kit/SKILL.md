@@ -18,8 +18,10 @@ Use this procedure only after the user supplies the client name and source links
 ## Required QA before delivery
 
 - Check desktop and mobile navigation, keyboard focus, phone links, and request-form validation.
+- Verify responsive behavior at phone, tablet, laptop, and desktop widths, including the mobile Services dropdown, branded home/scroll-to-top action, and no horizontal overflow.
 - Test `/`, `/services`, every generated `/services/[slug]`, `/service-areas`, `/about`, and `/contact`.
 - Submit one approved test lead and confirm exactly one row lands in the client Leads tab with UTM fields and the expected A:U mapping.
 - Verify metadata, canonical URL, Open Graph/Twitter fields, LocalBusiness/HVACBusiness schema, FAQ schema when FAQs exist, sitemap, and robots.
+- Verify favicon, Apple-touch icon, Open Graph image, and Twitter preview use the client branding and contain no starter, Vercel, or framework branding.
 - Confirm no master-sheet data, B5 data, ClimaCare branding, unsupported claims, or client secrets remain in the starter or public build.
 - Record the final commit, deployment URL, form status, and any remaining blocker.
