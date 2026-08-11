@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { contractor } from "@/lib/site-config"
 import "./globals.css"
+import "./responsive.css"
 
 const siteUrl = contractor.business.siteUrl || "https://example.com"
 const siteDescription = contractor.business.description
@@ -18,8 +19,9 @@ export const metadata: Metadata = {
     siteName: contractor.business.name,
     title: contractor.business.name + " | HVAC Services",
     description: siteDescription,
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: contractor.business.name }],
   },
-  twitter: { card: "summary_large_image", title: contractor.business.name, description: siteDescription },
+  twitter: { card: "summary_large_image", title: contractor.business.name, description: siteDescription, images: ["/opengraph-image"] },
   category: "HVAC Services",
 }
 
