@@ -2,11 +2,13 @@
 
 import Link from "next/link"
 import { ChevronDown, Menu, Phone, X } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import { contractor } from "@/lib/site-config"
 import { SiteBrand } from "@/components/site-brand"
 
 export function SiteHeader() {
+  const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const links = [
@@ -16,19 +18,54 @@ export function SiteHeader() {
     { label: "Contact", href: "/contact" },
   ]
 
+  const isActive = (href: string) => href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`)
+
+  useEffect(() => {
+    setOpen(false)
+    setServicesOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!open) return
+
+    const previousOverflow = document.body.style.overflow
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false)
+    }
+    const closeAtDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setOpen(false)
+    }
+    const desktopQuery = window.matchMedia("(min-width: 961px)")
+
+    document.body.style.overflow = "hidden"
+    window.addEventListener("keydown", closeOnEscape)
+    desktopQuery.addEventListener("change", closeAtDesktop)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener("keydown", closeOnEscape)
+      desktopQuery.removeEventListener("change", closeAtDesktop)
+    }
+  }, [open])
+
+  const closeMenu = () => {
+    setOpen(false)
+    setServicesOpen(false)
+  }
+
   return (
     <header className="site-header">
       <div className="header-inner">
-        <SiteBrand />
+        <SiteBrand onActivate={closeMenu} />
         <nav className="desktop-nav" aria-label="Primary navigation">
-          <Link href="/">Home</Link>
-          <div className="nav-services">
-            <Link href="/services">Services <ChevronDown size={15}/></Link>
+          <Link href="/" className={isActive("/") ? "active" : undefined} aria-current={isActive("/") ? "page" : undefined}>Home</Link>
+          <div className={`nav-services${isActive("/services") ? " active" : ""}`}>
+            <Link href="/services" aria-current={isActive("/services") ? "page" : undefined}>Services <ChevronDown size={15}/></Link>
             <div className="nav-services-menu">
               {contractor.services.map(service => <Link key={service.slug} href={`/services/${service.slug}`}>{service.name}</Link>)}
             </div>
           </div>
-          {links.filter(link => link.href !== "/services").map(link => <Link key={link.href} href={link.href}>{link.label}</Link>)}
+          {links.filter(link => link.href !== "/services").map(link => <Link key={link.href} href={link.href} className={isActive(link.href) ? "active" : undefined} aria-current={isActive(link.href) ? "page" : undefined}>{link.label}</Link>)}
           <a className="button small" href="/#quote">Request Service</a>
         </nav>
         <div className="mobile-actions">
@@ -38,20 +75,25 @@ export function SiteHeader() {
           </button>
         </div>
       </div>
-      {open && <nav className="mobile-nav" aria-label="Mobile navigation">
-        <Link href="/" onClick={() => setOpen(false)}>Home</Link>
-        <div className="mobile-nav-group">
+      {open && <>
+        <button className="mobile-nav-backdrop" type="button" aria-label="Close menu" onClick={closeMenu}/>
+        <nav className="mobile-nav" aria-label="Mobile navigation">
+        <Link href="/" onClick={closeMenu} className={isActive("/") ? "active" : undefined} aria-current={isActive("/") ? "page" : undefined}>Home</Link>
+        <div className={`mobile-nav-group${isActive("/services") ? " active" : ""}`}>
           <button className="mobile-nav-toggle" type="button" aria-expanded={servicesOpen} onClick={() => setServicesOpen(value => !value)}>
             <span>Services</span><ChevronDown size={18}/>
           </button>
           {servicesOpen && <div className="mobile-subnav">
-            <Link href="/services" onClick={() => setOpen(false)}>All services</Link>
-            {contractor.services.map(service => <Link key={service.slug} href={`/services/${service.slug}`} onClick={() => setOpen(false)}>{service.name}</Link>)}
+            <Link href="/services" onClick={closeMenu}>All services</Link>
+            {contractor.services.map(service => <Link key={service.slug} href={`/services/${service.slug}`} onClick={closeMenu}>{service.name}</Link>)}
           </div>}
         </div>
-        {links.filter(link => link.href !== "/services").map(link => <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label}</Link>)}
-        <a className="button" href="/#quote" onClick={() => setOpen(false)}>Request Service</a>
-      </nav>}
+        {links.filter(link => link.href !== "/services").map(link => <Link key={link.href} href={link.href} onClick={closeMenu} className={isActive(link.href) ? "active" : undefined} aria-current={isActive(link.href) ? "page" : undefined}>{link.label}</Link>)}
+        <div className="mobile-nav-actions">
+          <a className="button" href={contractor.business.phoneHref} onClick={closeMenu}><Phone size={17}/> Call Now</a>
+          <a className="button secondary" href="/#quote" onClick={closeMenu}>Request Service</a>
+        </div>
+      </nav></>}
     </header>
   )
 }

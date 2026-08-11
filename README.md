@@ -11,8 +11,8 @@ Replace lib/site-config.ts with the new client profile. Keep reusable components
 The master starter includes the patterns selected from the ClimaCare build:
 
 - Conversion-first hero with phone and request-service CTAs
-- Responsive navigation with mobile menu
-- Mobile service dropdown, branded home/scroll-to-top behavior, and responsive tablet/mobile layout handling
+- Sticky, page-aware navigation with active states and a responsive mobile/tablet menu
+- Mobile Services accordion, Call/Request actions, Escape/outside-click dismissal, branded home/scroll-to-top behavior, and breakpoint-safe layouts from 320px through wide desktop
 - Config-driven service cards, service routes, and service index
 - Config-driven service-area page
 - Process section, FAQ section, and optional reviews
@@ -30,7 +30,7 @@ The master starter includes the patterns selected from the ClimaCare build:
 3. Duplicate the master Google Sheet into an entirely new client Sheet. Configure the client Sheet ID/tab and either the MurdockOps Google OAuth refresh-token variables or a service account in Vercel. Never use the master template as a production destination.
 4. Run the build and verify every generated service route.
 5. Test one form submission and confirm exactly one row writes to the client Leads tab.
-6. Run visual QA on desktop and mobile before launch.
+6. Run interaction and visual QA at 320px, 390px, 768px, phone landscape, 1024px, laptop, and wide-desktop widths before launch.
 
 ## Reusable operating procedure
 

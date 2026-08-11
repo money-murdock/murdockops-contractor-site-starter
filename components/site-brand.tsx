@@ -5,10 +5,11 @@ import { usePathname } from "next/navigation"
 import type { MouseEvent } from "react"
 import { contractor } from "@/lib/site-config"
 
-export function SiteBrand({ className = "brand" }: { className?: string }) {
+export function SiteBrand({ className = "brand", onActivate }: { className?: string; onActivate?: () => void }) {
   const pathname = usePathname()
 
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
+    onActivate?.()
     if (pathname === "/") {
       event.preventDefault()
       window.scrollTo({ top: 0, behavior: "smooth" })
