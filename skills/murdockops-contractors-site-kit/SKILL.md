@@ -14,7 +14,7 @@ Use this procedure after receiving the client name and at least one official sou
 3. Read and follow [references/brand-assets.md](references/brand-assets.md). Recover the best business-owned originals available from official sources, normalize them into `public/brand`, record provenance, and populate `business.brandAssets` in `lib/site-config.ts`. Never bypass access controls or use third-party stock, social-interface, map, manufacturer, or competitor imagery.
 4. Create an entirely separate Google Sheet by duplicating the clean MurdockOps Contractor Command Center template. Populate the client copy only; preserve Leads A:U and record the new Sheet ID.
 5. Create a separate client website from the starter. Replace configuration, approved copy, assets, and environment variables while keeping reusable components generic. Configure the new Sheet ID/tab and OAuth refresh-token credentials for the MurdockOps Google account, with service-account credentials as a supported fallback.
-6. Deploy the client website separately with its own Vercel project and Sheet credentials. Never modify unrelated projects.
+6. Deploy the client website separately with its own Vercel project and Sheet credentials. Connect the client’s production custom domain and set `business.siteUrl` to that exact HTTPS origin before launch. Never modify unrelated projects.
 
 ## Required QA before delivery
 
@@ -23,6 +23,7 @@ Use this procedure after receiving the client name and at least one official sou
 - Fetch the production HTML and verify canonical, `og:*`, `twitter:*`, and icon URLs resolve on the final client domain. Open the resolved images and visually inspect them.
 - Check the social preview at 1200×630. Use the company logo/name and the strongest suitable business-owned photo; prefer a branded truck when one is available. Never invent a truck, logo, employee, project, or credential.
 - Search source files and the production HTML/assets for `v0`, `Vercel`, starter names, previous clients, placeholder domains, and placeholder logos. Permit Vercel only as hosting infrastructure; never expose its branding in page content or preview assets.
+- Treat a public `*.vercel.app` client URL as a launch blocker. Verify the client-owned custom domain is primary and all canonical, Open Graph, Twitter, sitemap, and structured-data URLs use it.
 - Account for Facebook, Messenger, Google, and browser caching. Use each platform’s refresh/inspection tool after launch when an old preview persists; do not mistake a cached card for current metadata.
 - Check the sticky header after scrolling on every route. Verify active-page navigation, keyboard focus, phone links, and request-form validation.
 - Verify the mobile/tablet menu opens below the sticky header, expands Services, exposes Call and Request actions, locks background scrolling, and closes from Escape, outside click, route change, and the close button.
