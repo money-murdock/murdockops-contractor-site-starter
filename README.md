@@ -30,7 +30,8 @@ The master starter includes the patterns selected from the ClimaCare build:
 3. Duplicate the master Google Sheet into an entirely new client Sheet. Configure the client Sheet ID/tab and either the MurdockOps Google OAuth refresh-token variables or a service account in Vercel. Never use the master template as a production destination.
 4. Run the build and verify every generated service route.
 5. Test one form submission and confirm exactly one row writes to the client Leads tab.
-6. Run interaction and visual QA at 320px, 390px, 768px, phone landscape, 1024px, laptop, and wide-desktop widths before launch.
+6. Connect the client-owned custom domain and set `business.siteUrl` to that exact HTTPS origin. Do not launch or share a client-facing `*.vercel.app` URL.
+7. Run interaction and visual QA at 320px, 390px, 768px, phone landscape, 1024px, laptop, and wide-desktop widths before launch.
 
 ## Reusable operating procedure
 
